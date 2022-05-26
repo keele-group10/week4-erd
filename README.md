@@ -16,3 +16,9 @@ To contribute your work to this repo:
 ## Approving work
 1. Check the code over, making comments if necessary
 2. Once problems resolved, approve the PR
+
+# References
+
+* [Blog post](https://medium.com/@urna.hybesis/pull-request-workflow-with-git-6-steps-guide-3858e30b5fa4) that covers this sort of workflow in a bit more detail
+* [Using Git in VSCode](https://adamtheautomator.com/visual-studio-code-git/)
+* [Basics of Git in 10 minutes](https://www.freecodecamp.org/news/learn-the-basics-of-git-in-under-10-minutes-da548267cc91/)
