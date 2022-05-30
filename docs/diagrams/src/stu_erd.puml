@@ -1,0 +1,116 @@
+@startuml stu_bmi2
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity event {
+    * event_id : number <<generated>>
+    --
+    * name : text
+    * description : text
+    start_date : Date
+    end_date : Date
+    location : text   
+}
+
+entity company {
+    * company_id : number <<generated>>
+    --
+    * name : text
+    * description : text
+    event_page : link
+    * primary_contact : number <<FK>>
+}
+
+entity person {
+    * person_id : number <<generated>>
+    --
+    * name : text
+    * email_address : email_address
+    company_id : number <<FK>>
+    organizer_id : number <<FK>>
+    session_booking_id : number <<FK>>
+    session_id : number <<FK>>
+}
+
+entity event_organiser {
+    * organizer_id : number <<generated>>
+    --
+    * person_id : person_id <<FK>>
+    * event_id : event_id <<FK>>
+}
+
+entity exhibitor {
+    * exhibitor_id : number <<generated>>
+    --
+    * company_id : company_id <<FK>>
+}
+
+entity stand {
+    * stand_id : number <<generated>>
+    --
+    * exhibitor_id : number <<FK>>
+    * location : text
+}
+
+entity stand_staff {
+    * stand_staff_id : number <<generated>>
+    --
+    * person_id : person_id <<FK>>
+    * event_id : event_id
+    * stand_id : stand_id <<FK>>
+}
+
+entity session {
+    * session_id : number <<generated>>
+    --
+    * person_id : number <<FK>>
+    * subject : text
+    start_time : Date
+    end_time : Date
+    location : text
+    max_attendees : number
+}
+
+entity session_booking {
+    * session_booking_id : number <<generated>>
+    --
+    * session_id : session_id <<FK>>
+    * person_id : person_id <<FK>>
+}
+
+entity poll {
+    * poll_id : number <<generated>>
+    --
+    * moderator : person_id
+    * session_id : session_id <<FK>>
+    * question : text
+    * option_1 : text
+    * option_2 : text
+    option_3 : text
+    option_4 : text
+    option_5 : text
+}
+
+event }|--|| event_organiser : organises
+event_organiser  |o--|{ person
+person }|--o| company : works for
+event ||--|{ exhibitor
+stand ||--|| exhibitor : runs
+session }o--|{ person : delivers
+session ||--o{ poll
+session_booking }o--|| person : attends
+session_booking }|--|| session : attended by
+exhibitor ||--|| company : exhibits
+stand_staff }|--|| stand
+person ||--o{ stand_staff
+' note right on link
+' A single person may staff multiple stands
+' at multiple events
+' end note
+
+
+@enduml
