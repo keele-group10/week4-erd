@@ -96,7 +96,7 @@ entity poll {
 }
 
 event }|--|| event_organiser : organises
-event_organiser  |o--|{ person
+event_organiser  }o--|{ person
 person }|--o| company : works for
 event ||--|{ exhibitor
 stand ||--|| exhibitor : runs
