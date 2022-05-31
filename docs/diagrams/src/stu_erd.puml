@@ -36,6 +36,14 @@ entity person {
     session_id : number <<FK>>
 }
 
+entity attendee_booking {
+    * booking_id : number <<generated>>
+    --
+    * person_id : person_id <<FK>>
+    * event_id : event_id <<FK>>
+    * checked_in : Boolean
+}
+
 entity event_organiser {
     * organizer_id : number <<generated>>
     --
@@ -107,6 +115,8 @@ session_booking }|--|| session : attended by
 exhibitor ||--|| company : exhibits
 stand_staff }|--|| stand
 person ||--o{ stand_staff
+person ||--o{ attendee_booking
+event ||--o{ attendee_booking
 ' note right on link
 ' A single person may staff multiple stands
 ' at multiple events
