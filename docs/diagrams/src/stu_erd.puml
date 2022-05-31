@@ -30,10 +30,12 @@ entity person {
     --
     * name : text
     * email_address : email_address
-    company_id : number <<FK>>
-    organizer_id : number <<FK>>
-    session_booking_id : number <<FK>>
-    session_id : number <<FK>>
+    company_id : company_id <<FK>>
+    organizer_id : organizer_id <<FK>>
+    session_booking_id : session_booking_id <<FK>>
+    session_id : session_id <<FK>>
+    stand_staff_id : stand_staff_id <<FK>>
+    booking_id : booking_id <<FK>>
 }
 
 entity attendee_booking {
